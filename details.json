@@ -1,0 +1,14 @@
+{
+    "city": {
+        "city_name_1" : "Enter the first city here",
+        "city_name_2" : "Enter the second city here",
+        "city_name_3" : "Enter the third city here",
+        "city_name_4" : "Enter the fourth city here",
+        "city_name_5" : "Enter the fifth city here"
+
+    },
+
+    "car_details": {
+      "car_name" : "Enter the car name here"
+    }
+}
