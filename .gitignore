@@ -1,0 +1,14 @@
+# ClointFusion Unnecessary files & folders
+Cloint-ICON-CDT.ico
+Cloint-ICON.ico 
+Cloint-LOGO.PNG
+Excel_Files
+Cars_report.zip
+Workspace_Dont_Ask_Again.txt
+First_Run.xlsx
+
+# for testing this project
+temp.py
+
+# vscode settings folder
+.vscode
