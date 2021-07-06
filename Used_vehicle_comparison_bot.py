@@ -1,6 +1,6 @@
 # Author Info
 """
-    author: Md-Yawar
+    author: Mohammad Yawar
     github_username: Md-Yawar
     email: mdyawar.yy@gmail.com
 """
