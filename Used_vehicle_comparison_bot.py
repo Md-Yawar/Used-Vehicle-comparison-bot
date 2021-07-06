@@ -1,20 +1,56 @@
-import ClointFusion as cf
-from tkinter.constants import TRUE
-import time
-from datetime import date
-from zipfile import ZipFile
-import os
-from os.path import basename
+# Author Info
+"""
+    author: Md-Yawar
+    github_username: Md-Yawar
+    email: mdyawar.yy@gmail.com
+"""
 
-#openiing mahindra first choice website
+# Imports
+import ClointFusion as cf
+import os
+import sys
+from datetime import date, datetime
+from zipfile import ZipFile
+import time
+
+
+#--------------------------------
+'''Global Variables'''
+
+# Workspace & BOT Files directories 
+WORKSPACE_DIR = os.getcwd()
+BOT_FILES_DIR = os.path.join(WORKSPACE_DIR,'ClointFusion_BOT')
+
+# Client & Dev email path
+CONFIG_FILES_DIR = os.path.join(BOT_FILES_DIR,'Config_Files')
+EMAIL_DETAILS_JSON = os.path.join(CONFIG_FILES_DIR,'email_details.json')
+OUTLOOK_CREDENTIALS_JSON = os.path.join(CONFIG_FILES_DIR,'credentials.json')
+CAR_DETAILS_JSON = os.path.join(CONFIG_FILES_DIR,'car_details.json')
+
+DATE_TODAY = str(date.today())
+CARS24_LINK = "https://cars24.com"
+MAHINDRA_FIRST_LINK = "https://www.mahindrafirstchoice.com"
+
+
+#------------------------------------------
+
+# Adding Workspace Dir to temporary sys path
+sys.path.append(WORKSPACE_DIR)
+
+#-----------------------------------------
+'''User Defined Functions'''
+
+# User defined functions & Class goes down here.
+ 
+#opening mahindra first choice website
 def open_website_mahindra():
 
     browser_state = False
     
     try:
-        browser_state = cf.launch_website_h(Mahindra_first_link)
+        browser_state = cf.launch_website_h(MAHINDRA_FIRST_LINK)
         
-    except:
+    except Exception as e:
         print("Error in opening Mahindra First choice website")
 
     finally:
@@ -27,7 +63,7 @@ def location_select_mahindra():
         time.sleep(0.5)
         cf.browser_mouse_click_h(city_name)
 
-    except:
+    except Exception as e:
         print("location cannot be selected")
 
 #selecting car in mahindra first choice website
@@ -41,7 +77,7 @@ def car_select_mahindra():
         time.sleep(0.5)
 
 
-    except:
+    except Exception as e:
         print("car cannot be selected")
 
 
@@ -50,7 +86,7 @@ def create_excel_sheet_mahindra():
     try:
         cf.excel_create_excel_file_in_given_folder(folder_location[:-1],excelFileName=sheet_name_mahindra )
     
-    except:
+    except Exception as e:
         print("excel sheet cannot be created")  
 
 #storing the information in the mahindrafirstchoice spreadsheet 
@@ -65,7 +101,7 @@ def store_excel_sheet_mahindra():
             cf.excel_set_single_cell(sheet_location_mahindra,columnName="Model name",cellNumber=i,setText=t[0])
             i=i+1
 
-    except:
+    except Exception as e:
         print("Error in collecting data")
     try:
 
@@ -78,7 +114,7 @@ def store_excel_sheet_mahindra():
             print(t[0])
             cf.excel_set_single_cell(sheet_location_mahindra,columnName="Car name",cellNumber=i,setText=t[0])
             i=i+1
-    except:
+    except Exception as e:
         print("Error in collecting data")
 
     try:
@@ -90,7 +126,7 @@ def store_excel_sheet_mahindra():
             i=i+1
 
 
-    except:
+    except Exception as e:
         print("Error in collecting data")
 
     try:
@@ -108,7 +144,7 @@ def store_excel_sheet_mahindra():
                 cf.excel_set_single_cell(sheet_location_mahindra,columnName="Kilometres used",cellNumber=q,setText=t[0])
                 q=q+1
             i=i+1
-    except:
+    except Exception as e:
         print("Error collecting info")
 
     try:
@@ -132,7 +168,7 @@ def store_excel_sheet_mahindra():
                   q=q+1
             i=i+1
 
-    except:
+    except Exception as e:
         print("Error collecting info")
 
     try:
@@ -148,7 +184,7 @@ def store_excel_sheet_mahindra():
                 q=q+1
             i=i+1
 
-    except:
+    except Exception as e:
         print("Error collecting info")
 
     try:
@@ -166,7 +202,7 @@ def store_excel_sheet_mahindra():
                 q=q+1
             i=i+1
 
-    except:
+    except Exception as e:
         print("Error in collecting info")
 
 
@@ -176,9 +212,9 @@ def open_website():
     browser_state = False
     
     try:
-        browser_state = cf.launch_website_h(cars24_link)
+        browser_state = cf.launch_website_h(CARS24_LINK)
         
-    except:
+    except Exception as e:
         print("Error in opening cars24 website")
 
     finally:
@@ -193,7 +229,7 @@ def location_select():
         time.sleep(0.5)
         cf.browser_mouse_click_h(city_name)
 
-    except:
+    except Exception as e:
         print("location cannot be selected")
 
 
@@ -210,7 +246,7 @@ def car_select():
         time.sleep(0.5)
 
 
-    except:
+    except Exception as e:
         print("car cannot be selected")
 
 #creating the cars24 spreadsheet
@@ -219,7 +255,7 @@ def create_excel_sheet():
     try:
         cf.excel_create_excel_file_in_given_folder(folder_location[:-1],excelFileName=sheet_name )
     
-    except:
+    except Exception as e:
         print("excel sheet cannot be created")
 
 
@@ -238,7 +274,7 @@ def store_excel_sheet():
             cf.excel_set_single_cell(sheet_location,columnName="Name",cellNumber=i,setText=h[0])
             i=i+1
   
-    except:
+    except Exception as e:
         print("error in collecting the car names") 
     time.sleep(1)
    
@@ -252,7 +288,7 @@ def store_excel_sheet():
             cf.excel_set_single_cell(sheet_location,columnName="Price",cellNumber=i,setText=h[0])
             i=i+1
 
-    except:
+    except Exception as e:
         print("error in collecting the car price")
 
   
@@ -275,7 +311,7 @@ def store_excel_sheet():
                 q=q+1 
             i=i+1
             
-    except:
+    except Exception as e:
         print("error in collecting the kilometres used")
 
   
@@ -292,7 +328,7 @@ def store_excel_sheet():
           cf.excel_set_single_cell(sheet_location,columnName="Engine type",cellNumber=i,setText=h[0])
           i=i+1
    
-    except:
+    except Exception as e:
         print("error in collecting the engine type ")
 
 def get_all_file_paths(directory):
@@ -312,7 +348,7 @@ def get_all_file_paths(directory):
 
 def zip_files():
  # path to folder which needs to be zipped
- directory = 'C:\Cars24_car_details_download_automation'
+ directory = WORKSPACE_DIR
 
  # calling function to get all file paths in the directory
  file_paths = get_all_file_paths(directory)
@@ -338,7 +374,7 @@ def send_outlook_email():
     try:
 
         #getting the outlook credentials from json file
-        outlook_details = cf.file_get_json_details(path_of_json_file=CREDENTIALS_JSON,section='Outlook')
+        outlook_details = cf.file_get_json_details(path_of_json_file=OUTLOOK_CREDENTIALS_JSON,section='Outlook')
 
         outlook_username = outlook_details.get('username')
         outlook_password = outlook_details.get('password')
@@ -379,13 +415,13 @@ def send_outlook_email():
         time.sleep(0.5)
 
         #sending the zip file
-        cf.key_write_enter(strMsg='C:\Cars24_car_details_download_automation\Cars_report.zip')
+        cf.key_write_enter(strMsg=f'{WORKSPACE_DIR}\\Cars_report.zip')
         time.sleep(1)
 
         cf.browser_mouse_click_h('Send')
 
 
-    except:
+    except Exception as e:
         print("Error in Sending Outlook Email")
 
 
@@ -397,7 +433,7 @@ def cars_24():
         time.sleep(1)
      
      
-        if browser_state==TRUE:
+        if browser_state==True:
    
             #setting the location in cars24 website
             location_select()
@@ -418,7 +454,7 @@ def cars_24():
         else:
             print("browser not opened")
     
-    except:
+    except Exception as e:
         print("error")
 
 
@@ -428,7 +464,7 @@ def mahindra_first():
         browser_state= open_website_mahindra()
         time.sleep(1)
 
-        if browser_state==TRUE:
+        if browser_state==True:
    
             #setting the location in mahindra_first_choice website
             location_select_mahindra()
@@ -446,7 +482,7 @@ def mahindra_first():
             store_excel_sheet_mahindra()
         else:
             print("browser not opened")
-    except:
+    except Exception as e:
         print("error")
 
 # Zip the files from given directory that matches the filter
@@ -454,41 +490,23 @@ def mahindra_first():
 
 
 if __name__ == '__main__':
-
-    #assigning all the variables
-    date_today = str(date.today())
-    cars24_link = "https://www.cars24.com"
-    Mahindra_first_link = "https://www.mahindrafirstchoice.com/"
-
-    #getting Outlook credential details from json file
-    CREDENTIALS_JSON = "C:\Cars24_car_details_download_automation\credentials.json"
-
-    #getting car and city information from json
-    DETAILS_JSON = "C:\Cars24_car_details_download_automation\details.json"
-
     #storing the city names in a list
-    city_details = cf.file_get_json_details(path_of_json_file=DETAILS_JSON,section='city')
-    city_names=[]
-    city_names.append(city_details.get('city_name_1'))
-    city_names.append(city_details.get('city_name_2'))
-    city_names.append(city_details.get('city_name_3'))
-    city_names.append(city_details.get('city_name_4'))
-    city_names.append(city_details.get('city_name_5'))
+    city_names = cf.file_get_json_details(path_of_json_file=CAR_DETAILS_JSON,section='city')
+    print(city_names)
 
     #soring the car name
-    DETAILS_JSON = "C:\Cars24_car_details_download_automation\details.json"
-    car_details = cf.file_get_json_details(path_of_json_file=DETAILS_JSON,section='car_details')
-    car_name=car_details.get('car_name')
+    car_details = cf.file_get_json_details(path_of_json_file=CAR_DETAILS_JSON,section='car_details')
+    car_name=car_details.get('company_name')
 
     #iterating for all the cities
     for city_name in city_names:
 
         #setting the sheet name according to the city,car and date
-        sheet_name = car_name +"_"+ city_name + "_" + date_today + "_cars24"
-        sheet_name_mahindra = car_name +"_"+ city_name + "_" + date_today + "_MahindraFirstChoice"
-        folder_location='C:\Cars24_car_details_download_automation\ '
-        sheet_location= folder_location[:-1] + sheet_name + ".xlsx" 
-        sheet_location_mahindra= folder_location[:-1] + sheet_name_mahindra + ".xlsx"
+        sheet_name = car_name +"_"+ city_name + "_" + DATE_TODAY + "_cars24"
+        sheet_name_mahindra = car_name +"_"+ city_name + "_" + DATE_TODAY + "_MahindraFirstChoice"
+        folder_location=f'{WORKSPACE_DIR}\\Excel_Files\\'
+        sheet_location= folder_location + sheet_name + ".xlsx" 
+        sheet_location_mahindra= folder_location + sheet_name_mahindra + ".xlsx"
 
         #calling the cars24 website function
         cars_24()
